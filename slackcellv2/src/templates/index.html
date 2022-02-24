@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+{% block body %}
+    <h1>
+        SlackCellv2Beta
+    </h1>
+
+    <div id="chart"></div>
+    <div><p>Sampling Rate: <span id="sampling_rate"></span> ms</p></div>
+    <input type="checkbox" id="update_plot" onclick="change_update_plot();" checked>
+    <label class="form-check-label" for="update_plot">Update plot</label>
+    <div id="current_draw"></div>
+
+    <div class="">
+        <div class="row pl-3">
+
+            <div class="col-xl-auto">
+                <h2>Forces</h2>
+                <table class="forces table">
+                    <tr>
+                        <td>Force:</td>
+                        <td id="force" class="text-right">-</td>
+                        <td class="text-right">kN</td>
+                    </tr>
+                    <tr>
+                        <td>Max Force:</td>
+                        <td id="max_force" class="text-right">-</td>
+                        <td class="text-right">kN</td>
+                    </tr>
+                </table>
+                <button class="btn btn-dark btn-block" type="button" onclick="reset_max_force()">
+                    Reset Max Force
+                </button>
+
+                <button class="btn btn-dark btn-block" id="btn_record_start" type="button" onclick="record_start()">
+                    Start Recording
+                </button>
+                <button class="btn btn-dark btn-block" id="btn_record_stop" type="button" onclick="record_stop()">
+                    Stop Recording
+                </button>
+            </div>
+
+            <div id="pi-stats" class="col-xl-auto">
+                <h2>Pi</h2>
+
+                <table class="pi-stats table">
+                    <tr>
+                        <td>Temperature:</td>
+                        <td id="pi_temp" class="text-right">-</td>
+                        <td class="text-right">°C</td>
+                    </tr>
+                    <tr>
+                        <td>Load average:</td>
+                        <td id="pi_load" class="text-right">-</td>
+                        <td class="text-right">%</td>
+                    </tr>
+                    <tr>
+                        <td>Disk usage:</td>
+                        <td id="pi_disk" class="text-right">-</td>
+                        <td class="text-right">%</td>
+                    </tr>
+                </table>
+                <a href="/calibration" class="btn btn-dark btn-block">Calibration</a>
+            </div>
+
+
+                        </div>
+            <div class="csv col-xl-auto">
+                <h2>Recordings</h2>
+                <ul id="recordings" class="list-group">
+                    {% for csv in list_csv %}
+                        <li class="list-group-item text-white"><a
+                                href="/static/data/{{ csv }}">{{ csv.replace('.csv', '') }}</a><span
+                                class="badge badge-success ml-2">CSV </span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/vanilla-picker.min.js"></script>
+    <script src="/static/js/script.js"></script>
+    <script src="/static/js/plotly.js"></script>
+    <script src="/static/js/charts.js"></script>
+    <script src="/static/js/live_force.js"></script>
+
+{% endblock %}

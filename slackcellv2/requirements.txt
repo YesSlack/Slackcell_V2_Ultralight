@@ -1,0 +1,6 @@
+flask
+RPi.GPIO
+gpiozero
+pandas
+numpy
+rpi-ws281x

@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+  {% block body %}
+    <h1 style="color: #9c3030;">
+      SlackCellv2Beta
+    </h1>
+    <h2>Calibration of loadcell</h2>
+    <h3>Current Values</h3>
+    <table class="calibration">
+      <tr>
+        <td>Offset:</td>
+        <td id="hx_offset" class="text-right">Fetching...</td>
+      </tr>
+      <tr>
+        <td>Reference unit:</td>
+        <td id="hx_reference_unit" class="text-right">Fetching...</td>
+      </tr>
+    </table>
+    <h3>Procedure</h3>
+    <ol>
+      <li>Remove all load of load cell</li>
+      <li>
+        <button type="button"  class="btn btn-dark" onclick="estimate_offset()">
+          Estimate Offset
+        </button><span id="offset_estimation"></span><br>
+        This will take ~10 seconds
+      </li>
+      <li>Put a known force on the load cell (1 kg = 9.81 N)<br>
+        Known force: <input type="number" id="known_force" value="800"/></li>
+      <li><button type="button" class="btn btn-dark" onclick="estimate_reference_unit()" id="estimate_reference_unit_button">
+        Estimate Reference Unit
+      </button><span id="reference_unit_estimation"></span><br>
+      This will take ~10 seconds</li>
+      <li><button type="button" class="btn btn-dark" onclick="save_config()" id="save_config_button">
+        Save Config
+      </button><span id="saved"></span></li>
+
+    </ol>
+
+    <a href="/" class="btn btn-dark">Back</a>
+        <script src="/static/js/api.js"></script>
+        <script src="/static/js/calibration.js"></script>
+  {% endblock %}

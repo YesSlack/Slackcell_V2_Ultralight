@@ -1,0 +1,11 @@
+[Unit]
+Description=push_buttons
+After=multi-user.target
+
+[Service]
+Type=idle
+User=pi
+ExecStart=sudo /usr/bin/python3 /home/pi/SlackCellv2/run.py
+
+[Install]
+WantedBy=multi-user.target
